@@ -2,7 +2,8 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   width: 100%;
-  min-height: 58.5rem;
+  min-height: 58vh;
+  height: 100%;
   background: url('assets/img-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
@@ -32,6 +33,10 @@ export const Container = styled.header`
           a {
             text-decoration: none;
             color: inherit;
+
+            &:hover {
+              color: #ab49ce;
+            }
           }
 
           .highlighted-link {
@@ -39,7 +44,15 @@ export const Container = styled.header`
             font-weight: 900;
             background: #ab49ce;
             padding: 1rem 3.7rem;
-            border-radius: 5px;
+            border-radius: 8px;
+            border: 1px solid #ab49ce;
+            transition: all 0.1s;
+
+            &:hover {
+              text-decoration: none;
+              background: none;
+              color: #ab49ce;
+            }
           }
         }
       }
@@ -49,7 +62,7 @@ export const Container = styled.header`
       width: 100%;
       margin: 0 auto;
       height: 45rem;
-      padding: 10rem 0 0 5rem;
+      padding: 10rem 0 0 12rem;
 
       h1 {
         font-weight: 400;
@@ -65,17 +78,22 @@ export const Container = styled.header`
         margin-top: 0.8rem;
         margin-bottom: 3rem;
         font-size: 1.8rem;
-        width: 40%;
+        width: 36%;
       }
 
       button {
-        width: 20rem;
         padding: 1rem 3rem;
         background: none;
         color: #ab49ce;
         font-weight: 900;
         border: 1px solid #ab49ce;
         border-radius: 8px;
+        transition: all 0.1s;
+
+        &:hover {
+          background: #ab49ce;
+          color: #fff;
+        }
       }
     }
   }
