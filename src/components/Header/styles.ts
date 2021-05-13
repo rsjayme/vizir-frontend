@@ -2,11 +2,12 @@ import styled from 'styled-components';
 
 export const Container = styled.header`
   width: 100%;
-  height: 58.5rem;
+  min-height: 58.5rem;
   background: url('assets/img-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
   background-position: top;
+  padding: 0 2rem;
 
   .content {
     max-width: 1440px;
@@ -45,6 +46,11 @@ export const Container = styled.header`
     }
 
     section.header-content {
+      width: 100%;
+      margin: 0 auto;
+      height: 45rem;
+      padding: 10rem 0 0 5rem;
+
       h1 {
         font-weight: 400;
         font-size: 7rem;
@@ -59,10 +65,11 @@ export const Container = styled.header`
         margin-top: 0.8rem;
         margin-bottom: 3rem;
         font-size: 1.8rem;
-        width: 33%;
+        width: 40%;
       }
 
       button {
+        width: 20rem;
         padding: 1rem 3rem;
         background: none;
         color: #ab49ce;
