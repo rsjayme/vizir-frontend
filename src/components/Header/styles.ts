@@ -1,13 +1,10 @@
 import styled from 'styled-components';
 
 export const Container = styled.header`
-  width: 100%;
-  min-height: 58vh;
-  height: 100%;
   background: url('assets/img-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: top;
+  background-position: center;
   padding: 0 2rem;
 
   .content {
@@ -19,6 +16,20 @@ export const Container = styled.header`
     nav {
       display: flex;
       justify-content: space-between;
+
+      @media (max-width: 500px) {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          margin-bottom: 3rem;
+        }
+      }
+
+      img {
+        max-width: 10rem;
+      }
 
       ul {
         display: flex;
@@ -60,9 +71,8 @@ export const Container = styled.header`
 
     section.header-content {
       width: 100%;
-      margin: 0 auto;
-      height: 45rem;
-      padding: 10rem 0 0 12rem;
+      margin: 10rem auto;
+      margin-left: 3rem;
 
       h1 {
         font-weight: 400;
@@ -93,6 +103,21 @@ export const Container = styled.header`
         &:hover {
           background: #ab49ce;
           color: #fff;
+        }
+      }
+
+      @media (max-width: 900px) {
+        background: rgba(255, 255, 255, 0.6);
+        padding: 3rem;
+        border-radius: 8px;
+        margin: 5rem auto;
+        margin-left: 1rem;
+        h1 {
+          width: 90%;
+        }
+
+        p {
+          width: 90%;
         }
       }
     }
