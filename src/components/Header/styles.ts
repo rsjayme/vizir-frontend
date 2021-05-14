@@ -4,7 +4,7 @@ export const Container = styled.header`
   background: url('assets/img-bg.png');
   background-repeat: no-repeat;
   background-size: cover;
-  background-position: center;
+  background-position: top;
   padding: 0 2rem;
 
   .content {

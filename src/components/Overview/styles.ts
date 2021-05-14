@@ -14,7 +14,7 @@ export const Container = styled.section`
       h1 {
         width: 70%;
         font-size: 4rem;
-        font-weight: 400;
+        font-weight: 500;
       }
     }
 
@@ -85,8 +85,7 @@ export const Container = styled.section`
               font-size: 1.8rem;
             }
 
-            th,
-            td {
+            th {
               padding: 1.2rem 4rem;
             }
 
@@ -153,6 +152,16 @@ export const Container = styled.section`
 
           .price-box {
             margin-top: 4rem;
+          }
+
+          table {
+            th {
+              padding: 1.2rem 3rem !important;
+            }
+
+            td {
+              padding: 1.5rem 3rem !important;
+            }
           }
         }
       }
