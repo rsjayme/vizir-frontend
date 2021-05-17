@@ -7,7 +7,7 @@ export const Container = styled.section`
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: 6rem 2rem;
+    padding: 6rem 6.5rem;
     display: flex;
     justify-content: space-between;
 
@@ -24,8 +24,19 @@ export const Container = styled.section`
         margin-top: 1.6rem;
       }
     }
+  }
 
-    .right-content {
+  @media (max-width: 800px) {
+    padding: 6rem 2rem;
+    .content {
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      .left-content {
+        width: 90%;
+        text-align: center;
+        margin-bottom: 3rem;
+      }
     }
   }
 `;

@@ -5,7 +5,7 @@ export const Container = styled.section`
   width: 100%;
   margin: 0 auto;
   margin-top: 3rem;
-  padding: 3.2rem 2rem;
+  padding: 3.2rem 6.5rem;
 
   .content {
     display: flex;
@@ -63,10 +63,16 @@ export const Container = styled.section`
               display: flex;
 
               span {
+                margin-top: 0.8rem;
                 margin-left: 0.8rem;
                 font-size: 2.4rem;
                 display: flex;
                 flex-direction: column;
+
+                span {
+                  margin-top: -0.1rem;
+                  margin-left: -0.1rem;
+                }
               }
             }
           }
@@ -139,6 +145,7 @@ export const Container = styled.section`
     }
 
     @media (max-width: 500px) {
+      padding: 6rem 2rem;
       .advantages {
         .advantage-left {
           width: 80% !important;

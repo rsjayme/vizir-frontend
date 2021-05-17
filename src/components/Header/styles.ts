@@ -11,10 +11,11 @@ export const Container = styled.header`
     max-width: 1440px;
     width: 100%;
     margin: 0 auto;
-    padding: 3.2rem 2rem;
+    padding: 3.2rem 6.5rem;
 
     nav {
       display: flex;
+      align-items: center;
       justify-content: space-between;
 
       @media (max-width: 500px) {
@@ -71,8 +72,7 @@ export const Container = styled.header`
 
     section.header-content {
       width: 100%;
-      margin: 10rem auto;
-      margin-left: 3rem;
+      margin: 10rem 0rem 10rem 8rem;
 
       h1 {
         font-weight: 400;
@@ -105,20 +105,36 @@ export const Container = styled.header`
           color: #fff;
         }
       }
+    }
+  }
 
-      @media (max-width: 900px) {
+  @media (max-width: 900px) {
+    .content {
+      padding: 3.2rem 2rem;
+
+      section.header-content {
+        padding: 4rem 12rem;
         background: rgba(255, 255, 255, 0.6);
-        padding: 3rem;
         border-radius: 8px;
-        margin: 5rem auto;
-        margin-left: 1rem;
+        margin: 5rem 1rem;
+        width: 90%;
+
         h1 {
-          width: 90%;
+          width: 100%;
         }
 
         p {
           width: 90%;
         }
+      }
+    }
+  }
+
+  @media (max-width: 600px) {
+    .content {
+      section.header-content {
+        padding: 4rem 3rem;
+        width: 100%;
       }
     }
   }

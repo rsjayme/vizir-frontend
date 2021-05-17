@@ -23,7 +23,8 @@ export default function Header() {
 
         <section className="header-content">
           <h1>
-            Pague menos, <span>Fale Mais</span>
+            Pague menos, <br />
+            <span>Fale Mais</span>
           </h1>
           <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do

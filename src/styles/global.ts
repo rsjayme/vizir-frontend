@@ -31,8 +31,11 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  body {
+  body, input, select, button {
     font-family: Roboto, sans-serif;
+  }
+
+  body {
     background: #fff;
     font-size: 1.8rem;
   }
