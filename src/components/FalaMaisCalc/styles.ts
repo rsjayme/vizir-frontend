@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 interface IContainerProps {
-  isPlanSelectFocused: boolean;
+  isModalOpen: boolean;
+  hasAtLeastOneChecked: any[];
 }
 
 export const Container = styled.form<IContainerProps>`
@@ -49,48 +50,49 @@ export const Container = styled.form<IContainerProps>`
 
     .plan {
       position: relative;
-      ${(props) => props.isPlanSelectFocused && 'border: 1px solid #666666;'}
+      border: 1px solid rgba(102, 102, 102, 0);
+      ${(props) => props.isModalOpen && 'border: 1px solid #666666;'}
       border-radius: 8px;
+      cursor: pointer;
 
-      .plan-selector {
-        position: absolute;
-        left: 0.6%;
-        top: 85%;
-        background: #fff;
-        border: 1px solid #e5e5e5;
-        border-radius: 8px;
-        padding: 1.9rem;
-        width: 99%;
+      .plan-select-container {
         display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-direction: column;
-        z-index: 999;
+        justify-content: ${(props) =>
+          props.hasAtLeastOneChecked.length === 0
+            ? 'space-between'
+            : 'space-between'};
+
+        .plans-box-container {
+          display: flex;
+          align-items: center;
+          justify-content: left;
+        }
 
         p {
-          align-self: flex-start;
+          margin-top: 1rem;
+          margin-left: 0.5rem;
+          color: #a8a8a8;
         }
 
-        button {
-          margin-top: 2.5rem;
-          padding: 0.8rem 1.6rem;
-          background: none;
-          border: 1px solid #ab49ce;
-          border-radius: 8px;
-
-          color: #ab49ce;
-          font-size: 1.6rem;
-          font-weight: 900;
+        select {
+          width: 5%;
         }
 
-        .plans {
-          margin-top: 1.2rem;
-          display: flex;
-          width: 100%;
-          justify-content: space-between;
+        .plan-box {
+          & + .plan-box {
+            margin-left: 1.2rem;
+          }
 
-          label {
-            margin-left: 0.8rem;
+          p {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid red;
+            width: 10rem;
+            height: 2rem;
+            border-radius: 32px;
+            border: 1px solid #666666;
+            color: #000000;
           }
         }
       }
@@ -98,11 +100,38 @@ export const Container = styled.form<IContainerProps>`
   }
 
   .third-row {
-    display: flex;
-    justify-content: space-between;
+    .total {
+      display: flex;
+      justify-content: space-between;
+      p {
+        font-weight: bold;
+      }
+    }
 
-    p {
-      font-weight: bold;
+    .checkout {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+
+      .divisory {
+        margin-top: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      button {
+        padding: 1.5rem 11rem;
+        background: #9c49ce;
+        color: #fff;
+        border-radius: 8px;
+        font-weight: 700;
+        border: none;
+        transition: filter 0.2s;
+
+        &:hover {
+          filter: brightness(0.8);
+        }
+      }
     }
   }
 

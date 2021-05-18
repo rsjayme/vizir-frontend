@@ -1,12 +1,36 @@
 import { useState } from 'react';
+import PlanSelector from '../PlanSelector';
 import { Container } from './styles';
 
 export default function FalaMaisCalc() {
-  const [isPlanSelectFocused, setIsPlanSelectFocused] =
-    useState<boolean>(false);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [hasAtLeastOneChecked, setHasAtLeastOneChecked] = useState([]);
+  const [appliedPlans, setAppliedPlans] = useState<boolean[]>([
+    false,
+    false,
+    false,
+  ]);
+
+  const plans = [
+    {
+      name: 'FalaMais 30',
+      price: 30,
+    },
+    {
+      name: 'FalaMais 60',
+      price: 60,
+    },
+    {
+      name: 'FalaMais 120',
+      price: 120,
+    },
+  ];
 
   return (
-    <Container isPlanSelectFocused={isPlanSelectFocused}>
+    <Container
+      isModalOpen={isModalOpen}
+      hasAtLeastOneChecked={hasAtLeastOneChecked}
+    >
       <div className="first-row">
         <div className="container src">
           <p>ORIGEM</p>
@@ -48,58 +72,51 @@ export default function FalaMaisCalc() {
       <div className="divisory"></div>
 
       <div className="second-row">
-        <div className="container plan">
+        <div
+          className="container plan"
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           <p>PLANO</p>
-          <select
-            onFocus={() => setIsPlanSelectFocused(true)}
-            onBlurCapture={() => setIsPlanSelectFocused(false)}
-          >
-            <option disabled selected hidden>
-              Escolher o plano
-            </option>
-            <option>teste</option>
-          </select>
-
-          <div className="plan-selector">
-            <p>Escolha um ou mais planos:</p>
-            <div className="plans">
-              <div className="falemais-30">
-                <input
-                  type="checkbox"
-                  name="check-falemais-30"
-                  id="checkFaleMais30"
-                />
-                <label htmlFor="checkFaleMais30">FaleMais 30</label>
-              </div>
-
-              <div className="falemais-60">
-                <input
-                  type="checkbox"
-                  name="check-falemais-60"
-                  id="checkFaleMais60"
-                />
-                <label htmlFor="checkFaleMais60">FaleMais 60</label>
-              </div>
-
-              <div className="falemais-120">
-                <input
-                  type="checkbox"
-                  name="check-falemais-120"
-                  id="checkFaleMais120"
-                />
-                <label htmlFor="checkFaleMais120">FaleMais 120</label>
-              </div>
+          <div className="plan-select-container">
+            <div className="plans-box-container">
+              {hasAtLeastOneChecked.length === 0 ? (
+                <p>Escolher o plano</p>
+              ) : (
+                appliedPlans.map(
+                  (plan, index) =>
+                    plan && (
+                      <div className="plan-box">
+                        <p>{plans[index].name}</p>
+                      </div>
+                    )
+                )
+              )}
             </div>
-            <button>Aplicar</button>
+            <select disabled></select>
           </div>
+          <PlanSelector
+            isModalOpen={isModalOpen}
+            setIsModalOpen={setIsModalOpen}
+            setHasAtLeastOneChecked={setHasAtLeastOneChecked}
+            setAppliedPlans={setAppliedPlans}
+          />
         </div>
       </div>
 
       <div className="divisory"></div>
 
       <div className="third-row container">
-        <p>Total</p>
-        <p>R$ 0,00</p>
+        <div className="total">
+          <p>Total</p>
+          <p>R$ 0,00</p>
+        </div>
+
+        {hasAtLeastOneChecked.length > 0 && (
+          <div className="checkout">
+            <div className="divisory"></div>
+            <button>Contratar</button>
+          </div>
+        )}
       </div>
     </Container>
   );
