@@ -70,9 +70,16 @@ export default function FalaMaisCalc() {
             <option disabled selected hidden>
               Escolher tempo
             </option>
-            <option>011 - São Paulo</option>
-            <option>012 - São Paulo</option>
-            <option>011 - São Paulo</option>
+            <option>10 minutos</option>
+            <option>20 minutos</option>
+            <option>30 minutos</option>
+            <option>40 minutos</option>
+            <option>50 minutos</option>
+            <option>60 minutos</option>
+            <option>90 minutos</option>
+            <option>120 minutos</option>
+            <option>180 minutos</option>
+            <option>240 minutos</option>
           </select>
         </div>
       </div>
