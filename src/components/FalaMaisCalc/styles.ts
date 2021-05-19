@@ -99,6 +99,7 @@ export const Container = styled.form<IContainerProps>`
               height: 100%;
               display: flex;
               align-items: center;
+
               img {
                 margin-left: 0.5rem;
                 width: 1rem;
