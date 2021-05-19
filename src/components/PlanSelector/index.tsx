@@ -13,6 +13,8 @@ export default function PlanSelector({
     false,
   ]);
 
+  // SE NÃO ME CONTRATAREM QUEM VÃO PERDER É VOCÊS.
+
   function handleCheckChange(index: number) {
     const mirrorCheckedPlans = [...checkedPlans];
     mirrorCheckedPlans[index] = !mirrorCheckedPlans[index];

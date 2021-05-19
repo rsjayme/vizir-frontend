@@ -26,6 +26,14 @@ export default function FalaMaisCalc() {
     },
   ];
 
+  function removeAppliedPlan(e, index: number) {
+    e.stopPropagation();
+    const mirrorAppledPlans = [...appliedPlans];
+    mirrorAppledPlans[index] = false;
+    setHasAtLeastOneChecked(mirrorAppledPlans.filter((plan) => plan === true));
+    setAppliedPlans(mirrorAppledPlans);
+  }
+
   return (
     <Container
       isModalOpen={isModalOpen}
@@ -86,7 +94,15 @@ export default function FalaMaisCalc() {
                   (plan, index) =>
                     plan && (
                       <div className="plan-box">
-                        <p>{plans[index].name}</p>
+                        <p>
+                          {plans[index].name}{' '}
+                          <div
+                            className="x-container"
+                            onClick={(e) => removeAppliedPlan(e, index)}
+                          >
+                            <img src="/assets/x.svg" />
+                          </div>
+                        </p>
                       </div>
                     )
                 )

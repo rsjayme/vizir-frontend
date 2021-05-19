@@ -84,15 +84,32 @@ export const Container = styled.form<IContainerProps>`
           }
 
           p {
+            margin-left: -0.5rem;
             display: flex;
             align-items: center;
             justify-content: center;
             border: 1px solid red;
-            width: 10rem;
+            width: 11rem;
             height: 2rem;
             border-radius: 32px;
             border: 1px solid #666666;
             color: #000000;
+
+            .x-container {
+              height: 100%;
+              display: flex;
+              align-items: center;
+              img {
+                margin-left: 0.5rem;
+                width: 1rem;
+                height: 1rem;
+
+                &:hover {
+                  filter: invert(44%) sepia(30%) saturate(2011%)
+                    hue-rotate(242deg) brightness(81%) contrast(99%);
+                }
+              }
+            }
           }
         }
       }
@@ -103,6 +120,7 @@ export const Container = styled.form<IContainerProps>`
     .total {
       display: flex;
       justify-content: space-between;
+
       p {
         font-weight: bold;
       }
