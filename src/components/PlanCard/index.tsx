@@ -37,8 +37,8 @@ export default function PlanCard({
       )}
       <p className="subtitle">For organizing every corner of your life.</p>
       <h5>Everything in Personal, plus</h5>
-      {perks.map((perk) => (
-        <p className="perks-text">
+      {perks.map((perk, index) => (
+        <p key={index} className="perks-text">
           <img src="assets/check.svg" alt="Check" />
           {perk}
         </p>

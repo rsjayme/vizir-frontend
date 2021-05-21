@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { api } from '../../services/api';
 import PlanSelector from '../PlanSelector';
 import { Container } from './styles';
 
@@ -14,109 +15,82 @@ export default function FalaMaisCalc() {
 
   const [sourceSelect, setSourceSelect] = useState('');
   const [destinationSelect, setDestinationSelect] = useState('');
+  const destinationSelectRef = useRef<HTMLSelectElement>(null);
   const [timeSelect, setTimeSelect] = useState('');
+  const [dddsList, setDddsList] = useState([]);
+  const [plans, setPlans] = useState([]);
+  const [priceList, setPriceList] = useState([]);
+  const [totalValue, setTotalValue] = useState({
+    0: 0,
+    30: -1,
+    60: -1,
+    120: -1,
+  });
 
-  const plans = [
-    {
-      name: 'FalaMais 30',
-      price: 30,
-    },
-    {
-      name: 'FalaMais 60',
-      price: 60,
-    },
-    {
-      name: 'FalaMais 120',
-      price: 120,
-    },
-  ];
+  useEffect(() => {
+    api.get('/ddds').then((response) => {
+      setDddsList(response.data);
+    });
 
-  const ufs = [
-    {
-      ddd: '011',
-      uf: 'SP',
-    },
-    {
-      ddd: '016',
-      uf: 'LI',
-    },
-    {
-      ddd: '017',
-      uf: 'SP',
-    },
-    {
-      ddd: '018',
-      uf: 'SP',
-    },
-  ];
+    api.get('/plans').then((response) => {
+      setPlans(response.data);
+    });
 
-  const priceList = [
-    {
-      src: '011',
-      dst: '016',
-      value: 1.9,
-    },
-    {
-      src: '011',
-      dst: '017',
-      value: 1.7,
-    },
-    {
-      src: '011',
-      dst: '018',
-      value: 0.9,
-    },
-    {
-      src: '016',
-      dst: '011',
-      value: 2.9,
-    },
-    {
-      src: '016',
-      dst: '017',
-      value: 1.6,
-    },
-    {
-      src: '016',
-      dst: '018',
-      value: 0.9,
-    },
-    {
-      src: '017',
-      dst: '011',
-      value: 2.7,
-    },
-    {
-      src: '017',
-      dst: '016',
-      value: 1.7,
-    },
-    {
-      src: '017',
-      dst: '018',
-      value: 2.7,
-    },
-    {
-      src: '018',
-      dst: '011',
-      value: 1.9,
-    },
-    {
-      src: '018',
-      dst: '016',
-      value: 0.9,
-    },
-    {
-      src: '018',
-      dst: '017',
-      value: 1.9,
-    },
-  ];
+    api.get('/price-list').then((response) => {
+      setPriceList(response.data);
+    });
+  }, []);
+
+  useEffect(() => {
+    // atualiza o estado destinationselect de acordo com as mudanças do source,
+    // ref utilizado pra facilitar pois o novo valor do destination pode variar dependendo das opções selecionadas
+    if (sourceSelect === destinationSelect) {
+      setDestinationSelect(destinationSelectRef.current.value);
+    }
+  }, [sourceSelect]);
+
+  // Cálculo é feito aqui
+  useEffect(() => {
+    if (
+      sourceSelect &&
+      destinationSelect &&
+      timeSelect &&
+      sourceSelect !== destinationSelect
+    ) {
+      const [{ value: pricePerMin }] = priceList.filter(
+        (data) => data.src === sourceSelect && data.dst === destinationSelect
+      );
+
+      const total = {
+        0: Number(timeSelect) * pricePerMin,
+        30: -1,
+        60: -1,
+        120: -1,
+      };
+
+      if (hasAtLeastOneChecked.length > 0) {
+        appliedPlans.map((plan, index) => {
+          if (plan === true) {
+            const bonus = plans[index].bonus;
+            const minutesToPay = Number(timeSelect) - bonus;
+
+            if (minutesToPay <= 0) {
+              total[bonus] = 0;
+            } else {
+              total[bonus] = (minutesToPay * pricePerMin * 1.1).toFixed(2);
+            }
+          }
+        });
+      }
+
+      setTotalValue(total);
+    }
+  }, [hasAtLeastOneChecked, sourceSelect, destinationSelect, timeSelect]);
 
   function handleSourceSelection(e) {
-    const newDestionation = ufs.filter((uf) => uf.ddd !== e.target.value);
-
+    const newDestionation = dddsList.filter((uf) => uf.ddd !== e.target.value);
     // atualiza o select de destino de acordo com o select de origem.
+    console.log(newDestionation);
     setDestinationUfs(newDestionation);
 
     // atualiza o estado de origem com o valor selecionado no select.
@@ -129,6 +103,7 @@ export default function FalaMaisCalc() {
   }
 
   function handleTimeSelection(e) {
+    // atualiza o estado de tempo com o valor selecionado no select.
     setTimeSelect(e.target.value);
   }
 
@@ -152,7 +127,7 @@ export default function FalaMaisCalc() {
             <option value="default" disabled hidden>
               Escolher origem
             </option>
-            {ufs.map((uf) => (
+            {dddsList?.map((uf) => (
               <option value={uf.ddd} key={uf.ddd}>
                 {uf.ddd} - {uf.uf}
               </option>
@@ -162,7 +137,11 @@ export default function FalaMaisCalc() {
 
         <div className="container dst">
           <p>DESTINO</p>
-          <select defaultValue="default" onChange={handleDestinationSelection}>
+          <select
+            ref={destinationSelectRef}
+            defaultValue="default"
+            onChange={handleDestinationSelection}
+          >
             <option value="default" disabled hidden>
               Escolher destino
             </option>
@@ -180,16 +159,16 @@ export default function FalaMaisCalc() {
             <option value="default" disabled hidden>
               Escolher tempo
             </option>
-            <option>10 minutos</option>
-            <option>20 minutos</option>
-            <option>30 minutos</option>
-            <option>40 minutos</option>
-            <option>50 minutos</option>
-            <option>60 minutos</option>
-            <option>90 minutos</option>
-            <option>120 minutos</option>
-            <option>180 minutos</option>
-            <option>240 minutos</option>
+            <option value="10">10 minutos</option>
+            <option value="20">20 minutos</option>
+            <option value="30">30 minutos</option>
+            <option value="40">40 minutos</option>
+            <option value="50">50 minutos</option>
+            <option value="60">60 minutos</option>
+            <option value="90">90 minutos</option>
+            <option value="120">120 minutos</option>
+            <option value="180">180 minutos</option>
+            <option value="240">240 minutos</option>
           </select>
         </div>
       </div>
@@ -210,8 +189,8 @@ export default function FalaMaisCalc() {
                 appliedPlans.map(
                   (plan, index) =>
                     plan && (
-                      <div className="plan-box">
-                        <p>
+                      <div key={index} className="plan-box">
+                        <span>
                           {plans[index].name}
                           <div
                             className="x-container"
@@ -219,7 +198,7 @@ export default function FalaMaisCalc() {
                           >
                             <img src="/assets/x.svg" />
                           </div>
-                        </p>
+                        </span>
                       </div>
                     )
                 )
@@ -241,8 +220,29 @@ export default function FalaMaisCalc() {
       <div className="third-row container">
         <div className="total">
           <p>Total</p>
-          <p>R$ 0,00</p>
+          <p>
+            {new Intl.NumberFormat('pt-br', {
+              style: 'currency',
+              currency: 'BRL',
+            }).format(totalValue[0])}
+          </p>
         </div>
+
+        {plans.map(
+          (plan, index) =>
+            totalValue[plan.bonus] >= 0 &&
+            appliedPlans[index] && (
+              <div key={plan.bonus} className="total">
+                <p>Total FaleMais {plan.bonus}</p>
+                <p>
+                  {new Intl.NumberFormat('pt-br', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(totalValue[plan.bonus])}
+                </p>
+              </div>
+            )
+        )}
 
         {hasAtLeastOneChecked.length > 0 && (
           <div className="checkout">

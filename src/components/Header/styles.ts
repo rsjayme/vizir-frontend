@@ -18,6 +18,10 @@ export const Container = styled.header`
       align-items: center;
       justify-content: space-between;
 
+      a {
+        cursor: pointer;
+      }
+
       @media (max-width: 500px) {
         flex-direction: column;
         justify-content: center;

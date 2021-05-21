@@ -1,8 +1,8 @@
 import { Container } from './styles';
 
-export default function Overview() {
+export default function Overview({ overviewRef }) {
   return (
-    <Container>
+    <Container ref={overviewRef}>
       <div className="content">
         <div className="left-content">
           <h1>Vantanges do FaleMais</h1>

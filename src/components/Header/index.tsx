@@ -1,6 +1,6 @@
 import { Container } from './styles';
 
-export default function Header() {
+export default function Header({ calcSectionRef, overviewRef }) {
   return (
     <Container>
       <div className="content">
@@ -8,10 +8,22 @@ export default function Header() {
           <img src="assets/logo.svg" alt="Logo" />
           <ul>
             <li>
-              <a href="#">Vantages</a>
+              <a
+                onClick={() =>
+                  overviewRef.current.scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                Vantages
+              </a>
             </li>
             <li>
-              <a href="#">Cálculo</a>
+              <a
+                onClick={() =>
+                  calcSectionRef.current.scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                Cálculo
+              </a>
             </li>
             <li>
               <a className="highlighted-link" href="#">

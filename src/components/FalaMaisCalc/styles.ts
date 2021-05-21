@@ -83,7 +83,7 @@ export const Container = styled.form<IContainerProps>`
             margin-left: 1.2rem;
           }
 
-          p {
+          span {
             margin-left: -0.5rem;
             display: flex;
             align-items: center;

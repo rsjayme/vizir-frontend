@@ -1,9 +1,9 @@
 import { Container } from './styles';
 import FalaMaisCalc from '../FalaMaisCalc';
 
-export default function CalcSection() {
+export default function CalcSection({ calcSectionRef }) {
   return (
-    <Container>
+    <Container ref={calcSectionRef}>
       <div className="content">
         <div className="left-content">
           <h1>

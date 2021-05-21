@@ -14,7 +14,6 @@ export default function FormComponent({
   children,
   height,
   width,
-  onFocus,
   ...rest
 }: IFormComponentProps) {
   return (
