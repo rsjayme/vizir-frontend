@@ -22,16 +22,6 @@ export const Container = styled.header`
         cursor: pointer;
       }
 
-      @media (max-width: 500px) {
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-
-        img {
-          margin-bottom: 3rem;
-        }
-      }
-
       img {
         max-width: 10rem;
       }
@@ -139,6 +129,16 @@ export const Container = styled.header`
       section.header-content {
         padding: 4rem 3rem;
         width: 100%;
+      }
+
+      nav {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+
+        img {
+          margin-bottom: 3rem;
+        }
       }
     }
   }

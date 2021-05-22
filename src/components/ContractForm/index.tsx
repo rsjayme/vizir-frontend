@@ -2,7 +2,6 @@ import { Container } from './styles';
 import FormComponent from '../../components/FormComponent';
 import ContractDetails from '../ContractDetails';
 import CCInput from '../CCInput';
-import { useState } from 'react';
 
 export default function ContractForm({ plan }) {
   return (
@@ -70,6 +69,7 @@ export default function ContractForm({ plan }) {
             <option>Goiânia</option>
             <option>São Paulo</option>
           </FormComponent>
+
           <FormComponent
             FormType="select"
             title="Estado"
@@ -95,6 +95,7 @@ export default function ContractForm({ plan }) {
           type="text"
         />
       </div>
+
       <CCInput />
 
       <div className="button-container">

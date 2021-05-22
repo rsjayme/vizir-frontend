@@ -101,15 +101,6 @@ export const Container = styled.form`
     }
   }
 
-  /* input:focus,
-  select:focus {
-    outline: none;
-    border: 1px solid #9c49ce;
-    border-radius: 8px;
-    -webkit-box-shadow: 0px 0px 5px #9c49ce;
-    box-shadow: 0px 0px 5px #9c49ce;
-  } */
-
   @media (max-width: 850px) {
     .personal-data {
       display: grid;

@@ -21,6 +21,7 @@ export default function FalaMaisCalc() {
   const [timeSelect, setTimeSelect] = useState('');
   const [dddsList, setDddsList] = useState([]);
   const [plans, setPlans] = useState([]);
+  const [times, setTimes] = useState([]);
   const [priceList, setPriceList] = useState([]);
   const [totalValue, setTotalValue] = useState({
     0: 0,
@@ -40,6 +41,10 @@ export default function FalaMaisCalc() {
 
     api.get('/price-list').then((response) => {
       setPriceList(response.data);
+    });
+
+    api.get('/time').then((response) => {
+      setTimes(response.data);
     });
   }, []);
 
@@ -142,7 +147,7 @@ export default function FalaMaisCalc() {
             <option value="default" disabled hidden>
               Escolher origem
             </option>
-            {dddsList?.map((uf) => (
+            {dddsList.map((uf) => (
               <option value={uf.ddd} key={uf.ddd}>
                 {uf.ddd} - {uf.uf}
               </option>
@@ -174,20 +179,11 @@ export default function FalaMaisCalc() {
             <option value="default" disabled hidden>
               Escolher tempo
             </option>
-            <option value="10">10 minutos</option>
-            <option value="20">20 minutos</option>
-            <option value="30">30 minutos</option>
-            <option value="40">40 minutos</option>
-            <option value="50">50 minutos</option>
-            <option value="60">60 minutos</option>
-            <option value="90">90 minutos</option>
-            <option value="120">120 minutos</option>
-            <option value="180">180 minutos</option>
-            <option value="240">240 minutos</option>
-
-            <option value="80">80 minutos</option>
-            <option value="200">200 minutos</option>
-            <option value="100">100 minutos</option>
+            {times.map(({ id, time }) => (
+              <option key={id} value={time}>
+                {time} minutos
+              </option>
+            ))}
           </select>
         </div>
       </div>
