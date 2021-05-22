@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { Container } from './styles';
 
 interface IPlanCard {
@@ -15,7 +16,15 @@ export default function PlanCard({
   img,
   perks,
 }: IPlanCard) {
+  const router = useRouter();
   const priceFormatted = price?.split(',');
+
+  function handleButtonClick() {
+    const [, value] = title.split(' ');
+    if (!value) return;
+
+    router.push(`/contract/${value}`);
+  }
 
   return (
     <Container>
@@ -44,7 +53,7 @@ export default function PlanCard({
         </p>
       ))}
 
-      <button>{buttonText}</button>
+      <button onClick={handleButtonClick}>{buttonText}</button>
     </Container>
   );
 }

@@ -1,6 +1,10 @@
 import { Container } from './styles';
 
-export default function Header({ calcSectionRef, overviewRef }) {
+export default function Header({
+  calcSectionRef,
+  overviewRef,
+  plansSectionRef,
+}) {
   return (
     <Container>
       <div className="content">
@@ -26,7 +30,12 @@ export default function Header({ calcSectionRef, overviewRef }) {
               </a>
             </li>
             <li>
-              <a className="highlighted-link" href="#">
+              <a
+                onClick={() =>
+                  plansSectionRef.current.scrollIntoView({ behavior: 'smooth' })
+                }
+                className="highlighted-link"
+              >
                 Contratar
               </a>
             </li>

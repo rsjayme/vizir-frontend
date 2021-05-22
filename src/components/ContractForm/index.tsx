@@ -4,7 +4,7 @@ import ContractDetails from '../ContractDetails';
 import CCInput from '../CCInput';
 import { useState } from 'react';
 
-export default function ContractForm() {
+export default function ContractForm({ plan }) {
   return (
     <Container>
       <h2>Dados pessoais</h2>
@@ -52,12 +52,14 @@ export default function ContractForm() {
             type="number"
             width="13rem"
           />
+
           <FormComponent
             FormType="input"
             title="Complemento"
             type="text"
             width="18.2rem"
           />
+
           <FormComponent
             FormType="select"
             title="Cidade"
@@ -81,7 +83,7 @@ export default function ContractForm() {
         </div>
       </div>
 
-      <ContractDetails />
+      <ContractDetails plan={plan} />
 
       <h2>Pagamento</h2>
 

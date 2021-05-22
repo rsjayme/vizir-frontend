@@ -1,9 +1,9 @@
 import PlanCard from '../PlanCard';
 import { Container } from './styles';
 
-export default function Plans() {
+export default function Plans({ plansSectionRef }) {
   return (
-    <Container>
+    <Container ref={plansSectionRef}>
       <h1>Planos</h1>
       <p>
         Excepteur sint occaecat cupidatatnon proident, sunt in culpa qui officia

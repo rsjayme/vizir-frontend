@@ -28,10 +28,12 @@ export const Container = styled.section`
 
   @media (max-width: 800px) {
     padding: 6rem 2rem;
+
     .content {
       flex-direction: column;
       align-items: center;
       justify-content: center;
+
       .left-content {
         width: 90%;
         text-align: center;

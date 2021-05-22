@@ -5,7 +5,7 @@ export default function CCInput({
   ...rest
 }: InputHTMLAttributes<HTMLInputElement>) {
   return (
-    <Container>
+    <Container {...rest}>
       <p>Número do cartão</p>
       <div className="input-container">
         <div className="cc-line-1">

@@ -1,9 +1,11 @@
+import { useRouter } from 'next/router';
 import { useEffect, useRef, useState } from 'react';
 import { api } from '../../services/api';
 import PlanSelector from '../PlanSelector';
 import { Container } from './styles';
 
 export default function FalaMaisCalc() {
+  const router = useRouter();
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const [hasAtLeastOneChecked, setHasAtLeastOneChecked] = useState([]);
   const [appliedPlans, setAppliedPlans] = useState<boolean[]>([
@@ -115,10 +117,23 @@ export default function FalaMaisCalc() {
     setAppliedPlans(mirrorAppledPlans);
   }
 
+  function handleFormSubmit(e) {
+    e.preventDefault();
+    let highestSelectedPlan = '';
+    appliedPlans.map((appliedPlan, index) => {
+      if (appliedPlan === true) {
+        highestSelectedPlan = plans[index].bonus;
+      }
+    });
+    console.log(highestSelectedPlan);
+    router.push(`/contract/${highestSelectedPlan}`);
+  }
+
   return (
     <Container
       isModalOpen={isModalOpen}
       hasAtLeastOneChecked={hasAtLeastOneChecked}
+      onSubmit={handleFormSubmit}
     >
       <div className="first-row">
         <div className="container src">
@@ -169,6 +184,10 @@ export default function FalaMaisCalc() {
             <option value="120">120 minutos</option>
             <option value="180">180 minutos</option>
             <option value="240">240 minutos</option>
+
+            <option value="80">80 minutos</option>
+            <option value="200">200 minutos</option>
+            <option value="100">100 minutos</option>
           </select>
         </div>
       </div>
@@ -206,6 +225,7 @@ export default function FalaMaisCalc() {
             </div>
             <select disabled></select>
           </div>
+
           <PlanSelector
             isModalOpen={isModalOpen}
             setIsModalOpen={setIsModalOpen}
